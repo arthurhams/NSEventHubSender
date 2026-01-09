@@ -52,7 +52,7 @@ public class NSEventHubSender
 
             string trainId = "T0001";
             if (req.Query.ContainsKey("trainId") && !string.IsNullOrEmpty(req.Query["trainId"]) && !string.IsNullOrWhiteSpace(req.Query["trainId"]))
-                trainId = int.Parse(req.Query["trainId"]);
+                trainId = req.Query["trainId"];
 
             // Read message from request body or use default
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
@@ -87,17 +87,12 @@ public class NSEventHubSender
             }
 
             int currentNumberOfEvents = 0;
-            while (currentbatchSize < batchSize)
+            while (currentNumberOfEvents < batchSize)
             {
                 for (int i = 1; i <= batchSize; i++)
                 {
                     eventBatch.TryAdd(new EventData(Encoding.UTF8.GetBytes($"Event {i}")));
                     currentNumberOfEvents++;
-                }
-
-                if (currentNumberOfEvents >= numberOfEvents)
-                {
-                    break;
                 }
                 // Send the batch of events
                 await producerClient.SendAsync(eventBatch);
