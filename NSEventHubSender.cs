@@ -58,8 +58,6 @@ public class NSEventHubSender
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var message = string.IsNullOrEmpty(requestBody) ? CreateMessageOfSize(messageSize, trainId) : requestBody;
 
-            using EventDataBatch eventBatch = await producerClient.CreateBatchAsync();
-
 
             // Create a batch of events
             int batchSize = 10; // in Kbytes
@@ -91,6 +89,7 @@ public class NSEventHubSender
             int currentNumberOfEvents = 0;
             while (currentNumberOfEvents < numberOfEvents)
             {
+                using EventDataBatch eventBatch = await producerClient.CreateBatchAsync();
                 for (int i = 1; i <= batchSize; i++)
                 {
                     eventBatch.TryAdd(new EventData(Encoding.UTF8.GetBytes(message)));
