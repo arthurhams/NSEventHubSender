@@ -90,12 +90,13 @@ public class NSEventHubSender
             while (currentNumberOfEvents < numberOfEvents)
             {
                 using EventDataBatch eventBatch = await producerClient.CreateBatchAsync();
-                for (int i = 1; i <= batchSize; i++)
-                {
+                //for (int i = 1; i <= batchSize; i++)
+                //{
                     eventBatch.TryAdd(new EventData(Encoding.UTF8.GetBytes(message)));
                     currentNumberOfEvents++;
-                }
+                //}
                 // Send the batch of events
+                _logger.LogInformation($"Successfully sent message to EventHub: {message}");
                 await producerClient.SendAsync(eventBatch);
                 eventBatch.Dispose();
             }
@@ -119,7 +120,7 @@ public class NSEventHubSender
     private string CreateMessageOfSize(int sizeInKb, string trainId = "T0001")
     {
         var sb = new StringBuilder();
-        for (int i = 0; i < sizeInKb * 64; i++)
+        for (int i = 0; i < sizeInKb * 60; i++)
         {
             sb.Append(string.Concat(trainId, "M", i.ToString("D4"), ":", Random.Shared.NextInt64(0, 9999).ToString("D4"), ";"));
         }
