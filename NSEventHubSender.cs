@@ -26,8 +26,8 @@ public class NSEventHubSender
         try
         {
             // Get EventHub connection string from environment variables
-            var connectionString = Environment.GetEnvironmentVariable("EventHubConnectionString");
-            var eventHubName = Environment.GetEnvironmentVariable("EventHubName");
+            var connectionString = Environment.GetEnvironmentVariable("EventHubIngestConnectionString");
+            var eventHubName = Environment.GetEnvironmentVariable("EventHubIngestName");
 
             if (string.IsNullOrEmpty(connectionString) || string.IsNullOrEmpty(eventHubName))
             {
