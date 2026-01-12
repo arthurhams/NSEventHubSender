@@ -87,7 +87,7 @@ public class NSEventHubSender
             }
 
             int currentNumberOfEvents = 0;
-            while (currentNumberOfEvents < batchSize)
+            while (currentNumberOfEvents < numberOfEvents)
             {
                 for (int i = 1; i <= batchSize; i++)
                 {
