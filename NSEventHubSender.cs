@@ -86,12 +86,14 @@ public class NSEventHubSender
                 _logger.LogWarning("Invalid numberOfEvents parameter. Using default value of 10.");
             }
 
+            _logger.LogInformation($"Starting to send: numberOfEvents {numberOfEvents}, batchSize: {batchSize}, messageSize: {messageSize}kb");
+            
             int currentNumberOfEvents = 0;
             while (currentNumberOfEvents < numberOfEvents)
             {
                 for (int i = 1; i <= batchSize; i++)
                 {
-                    eventBatch.TryAdd(new EventData(Encoding.UTF8.GetBytes($"Event {i}")));
+                    eventBatch.TryAdd(new EventData(Encoding.UTF8.GetBytes(message)));
                     currentNumberOfEvents++;
                 }
                 // Send the batch of events
