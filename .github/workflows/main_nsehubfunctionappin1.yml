@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/azure/functions-action
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy dotnet core project to Azure Function App - nsehbfunctionapp5
+name: Build and deploy dotnet core project to Azure Function App - nsehubfunctionappIn1
 
 on:
   push:
@@ -39,15 +39,15 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0E58AF0222A84071997B1BDC1D9894AA }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_1A890DABA566482DBB37A162074D76AA }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_54F63D18449D402B9F6E4BE7586606DC }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_5138615B77F742518E9E05DBF761E722 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_1234688263964869A9C28FD6CE6BFA6E }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_8B7D220687474AA7AD05917A505E6B02 }}
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
         id: fa
         with:
-          app-name: 'nsehbfunctionapp5'
+          app-name: 'nsehubfunctionappIn1'
           slot-name: 'Production'
           package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
           
