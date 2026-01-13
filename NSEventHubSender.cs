@@ -106,7 +106,7 @@ public class NSEventHubSender
             {
                 status = "success",
                 message = "Event sent to EventHub successfully",
-                eventData = message
+                eventData = "Message of size " + messageSize + "kb"
             });
         }
         catch (Exception ex)
